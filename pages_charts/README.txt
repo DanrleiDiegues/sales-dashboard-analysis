@@ -1,0 +1,1 @@
+In case of building the chart directly on the streamlit, we can build the dependeces here in this folder.
