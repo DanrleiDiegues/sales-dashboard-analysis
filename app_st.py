@@ -114,13 +114,11 @@ if page == "Home | Overview":
     with col1:
         st.plotly_chart(graphics["fig_dist_won_lost.pkl"], use_container_width=True)
     with col2:
-        
-    
-    # Add notes:
-    st.markdown("""
-    **Notes:**
-    - As we can see, we have a balanced dataset between Won and Lost Opportunities to Analyse.
-    """)
+        # Add notes:
+        st.markdown("""
+        **Notes:**
+        - As we can see, we have a balanced dataset between Won and Lost Opportunities to Analyse.
+        """)
     
     st.subheader("Dataset Details")
     
