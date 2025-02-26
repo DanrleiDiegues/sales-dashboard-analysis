@@ -6,7 +6,8 @@ import os
 from pages_charts.profile_wl import fig_wl_acc_type_count, fig_wl_acc_type_pct, fig_wl_country, fig_wl_country_pct
 
 st.set_page_config(
-    page_title="Dashboard de Oportunidades", 
+    page_title="Sales Opportunities Dashboard (2024)",
+    page_icon="📊", # 📈 
     layout="wide",
     initial_sidebar_state="expanded"
     )
@@ -80,7 +81,7 @@ data = pd.read_csv("data/sales_preprocessed_data.csv")
 
 # ------ Merck Logo -------
 
-logo_path = os.path.join(BASE_DIR, "docs/merck_logo.png")
+logo_path = os.path.join(BASE_DIR, "docs/merck_logo_blue.png")
 
 if os.path.exists(logo_path):
     st.image(logo_path, width=200)
