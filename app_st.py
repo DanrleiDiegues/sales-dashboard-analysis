@@ -114,7 +114,7 @@ if page == "Home | Overview":
     with col1:
         st.plotly_chart(graphics["fig_dist_won_lost.pkl"], use_container_width=True)
     with col2:
-        st.plotly_chart(graphics["fig_dist_won_lost.pkl"], use_container_width=True)
+        
     
     # Add notes:
     st.markdown("""
