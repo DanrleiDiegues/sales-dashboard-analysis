@@ -7,3 +7,4 @@ plotly==5.24.1
 shap==0.46.0
 pickleshare==0.7.5
 catboost==1.2.7
+ipython==8.27.0
