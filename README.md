@@ -11,8 +11,26 @@
 
 ### IMPROVEMENTS for next time:
 
-1. Create a Feature of MONTH, QUARTER and YEAR of Created Date and Closed Date - To make best analysis directly.
+sd1. Create a Feature of MONTH, QUARTER and YEAR of Created Date and Closed Date - To make best analysis directly.
  - Analysis such as TM, € / Month, 
 
 2. How to let the charts more interactive for the public?
 Try to create Interative charts on Streamlit (How can I do that? Is it necessary do not save the chart and instead build it on the streamlit?)
+
+
+### Improvements at Model to Prediction:
+
+Fast:
+- Cross Validation
+- Add New Features
+- Test different Models
+- Apply GridSearch
+
+
+Not Fast:
+- Make Feature_Eng
+
+
+
+
+Ask the question: Why the model achieved that result?

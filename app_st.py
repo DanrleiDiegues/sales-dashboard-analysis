@@ -4,6 +4,10 @@ import plotly.express as px
 import pickle
 import os
 from pages_charts.profile_wl import fig_wl_acc_type_count, fig_wl_acc_type_pct, fig_wl_country, fig_wl_country_pct
+import shap
+import matplotlib.pyplot as plt
+from io import StringIO
+import base64
 
 st.set_page_config(
     page_title="Sales Opportunities Dashboard (2024)",
@@ -93,18 +97,17 @@ else:
 
 st.sidebar.title("Navegação")
 page = st.sidebar.selectbox("Escolha uma página", 
-                            ["Home | Overview",
-                             "Profile | WON vs. LOST",
-                             "Average Ticket Analysis",
+                            ["Home : Overview",
+                             "Profile : WON vs. LOST",
+                             "Average Ticket",
                              "Average Time to Close",
-                             "Prediction",
-                             "Agent Assistant"
+                             "Model : Prediction"
                              ]
     )
 
 
 # ----------- HOME PAGE --------------
-if page == "Home | Overview":
+if page == "Home : Overview":
     
     st.title("Home")
     st.header('Overview data')
@@ -128,7 +131,7 @@ if page == "Home | Overview":
         
         
 # ----------- PROFILE PAGE --------------
-elif page == "Profile | WON vs. LOST":
+elif page == "Profile : WON vs. LOST":
     
     st.title("Profiles")
     st.header('Profile between WON vs. LOST')
@@ -348,7 +351,7 @@ elif page == "Profile | WON vs. LOST":
     
     
 # ----------- AVERAGE TICKET PAGE --------------   
-elif page == "Average Ticket Analysis":
+elif page == "Average Ticket":
     
     st.title("Average Ticket Analysis")
     st.header('Average Ticket Analysis')
@@ -539,11 +542,118 @@ elif page == "Average Time to Close":
         """)
     
 
- 
 # ----------- PREDICTION PAGE -------------- 
    
-elif page == "Prediction":
-    st.title("Stage Prediction")
+elif page == "Model : Prediction":
+    st.title("Stage Prediction")    
+
+    # Função para carregar o modelo
+    def load_model(model_name):
+        # Define o caminho para os modelos
+        data_folder = "./data/"
+        with open(data_folder + model_name, "rb") as f:
+            return pickle.load(f)
+    
+    # Dictionary with model performance scores
+    model_scores = {
+        "catboost_base_model.pkl": {
+            "accuracy": 0.6866,
+            "precision": 0.7251,
+            "recall": 0.6558,
+            "f1_score": 0.6887
+        },
+        "catboost_tuned_model.pkl": {
+            "accuracy": 0.6851,
+            "precision": 0.7184,
+            "recall": 0.6649,
+            "f1_score": 0.6906
+        }
+    }
+    
+    # Model selection
+    model_choice = st.selectbox("Select the model", list(model_scores.keys()))
+    model = load_model(model_choice)
+    # Get the scores for the selected model
+    scores = model_scores[model_choice]
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        # Display model performance
+        st.markdown(f"""
+            **Model's Performance | Scores:**
+            - **Accuracy:** {scores['accuracy']:.4f}
+            - **Precision:** {scores['precision']:.4f}
+            - **Recall:** {scores['recall']:.4f}
+            - **F1-score:** {scores['f1_score']:.4f}
+        """)
+    with col2:
+        # Display the impact of the chosen metric
+        st.markdown("""
+            **Notes:**
+            - **Accuracy:** Measures overall correctness but can be misleading if the dataset is imbalanced (e.g., too many LOST deals).
+            - **Precision:** Focuses on correctly identifying WON deals. Useful when false positives (misclassifying LOST as WON) are costly.
+            - **Recall:** Prioritizes capturing all actual WON deals. Important if missing a potential WIN is critical.
+            - **F1-score:** Balances precision and recall, making it ideal when both false positives and false negatives matter, especially with imbalanced data.
+        """)
+    
+    # Form for data input
+    st.header("Deal Prediction: WON or LOST")
+    st.subheader("Enter deal details")
+    
+    account_type = st.selectbox("Account Type", [' Small', ' Top 1', ' Top 2', ' Top 3'])
+    country = st.selectbox("Country", ['Country 1', 'Country 2', 'Country 5'])
+    segment = st.selectbox("Segment", ['Segment 1', 'Segment 2', 'Segment 3', 'Segment 4'])
+    deal_type = st.selectbox("Type", ['New Business', 'Existing Business'])
+    opp_value = st.number_input("Opportunity Value (EUR)", min_value=0, max_value=500, step=1) # Limiting entry to 500 (EUR)
+    
+    # Create DataFrame with input data
+    new_entry = pd.DataFrame({
+        ' Account Type': [account_type],
+        'Country': [country],
+        'Segment': [segment],
+        'Type': [deal_type],
+        ' Opp Value (EUR)': [opp_value]
+    })
+
+    # Prediction button
+    if st.button("Predict"):
+        prediction = model.predict(new_entry)
+        prediction_proba = model.predict_proba(new_entry)
+        
+        st.subheader("Prediction Result")
+        st.write(f"Prediction: {'WON' if prediction[0] == 1 else 'LOST'}")
+        st.write(f"Probability: {prediction_proba[0][0]:.2%} change of being LOST | {prediction_proba[0][1]:.2%} chance of being WON")
+        
+        # SHAP Analysis
+        explainer = shap.TreeExplainer(model)
+        shap_values = explainer.shap_values(new_entry)
+
+        # SHAP Force Plot
+        st.write("**SHAP Decision Visualization**")
+        shap.initjs()
+
+        # Gerar force_plot e salvar como HTML
+        force_plot = shap.force_plot(explainer.expected_value, shap_values[0], new_entry.iloc[0])
+        
+        # Salvar como HTML
+        html_file = StringIO()  # Corrigido para StringIO
+        shap.save_html(html_file, force_plot)
+
+        # Capturar o conteúdo da string
+        html_str = html_file.getvalue()
+
+        # Codificar em base64 para exibir no Streamlit
+        b64 = base64.b64encode(html_str.encode()).decode()
+
+        # Exibir no Streamlit como iframe
+        st.components.v1.html(f'<iframe src="data:text/html;base64,{b64}" width="100%" height="400"></iframe>', height=400)
+        
+        # SHAP Summary Plot
+        # st.subheader("SHAP Interpretation")
+        # st.write("**Feature Impact on Prediction**")
+        # fig, ax = plt.subplots()
+        # shap.summary_plot(shap_values, new_entry, show=False)
+        # st.pyplot(fig)
     
     
 # ----------- AGENT PAGE --------------    
