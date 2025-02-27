@@ -230,6 +230,7 @@ elif page == "Profile : WON vs. LOST":
     Notes | Segments:
     - Segment 1: 46.27% LOST vs. 29.58% WON – Dominates in LOST opportunities, indicating potential for improvement.
     - Segment 2: 25.13% LOST vs. 33.41% WON – Shows balanced performance, with a higher proportion of WON deals. This represents the Segment that we have better performance among the segments
+    - Segment 4: Represent a potential of sales. We can see even though the amount is not so expressive compared to others segments, in percentage is the one with more weight on WON vs. LOST.
     """)
     
     
@@ -252,8 +253,7 @@ elif page == "Profile : WON vs. LOST":
     - The month with more deals closed WON was March (4553 deals), representing 59.1% of the deals closed in the month. Followed by September (4166) (54.2%) and June (4091) (54.2%)
     - In percentage february was the best, followed by March and April.
 
-    - In terms of Total Numer of deals, the best Quarter is the Q1, with 11.7K deals WONs
-    - Proportionaly, the Q2 is better, with 54.9% deals WON
+    - In terms of Total Numer of deals, the best Quarter is the Q1, with 11.7K deals WONs. In percentage, Q2 is better, with 54.9% deals WON
 
     - January was the month with most LOSTs (5728), representing (59.4% of the deals closed on the month)
     - In terms of Total Number of Deals and Proportionaly, the Q4 is the worse quarter. With 10.893 deals Lost, representing 53.3% of the total in the quarter
