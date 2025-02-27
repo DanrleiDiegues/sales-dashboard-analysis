@@ -339,10 +339,6 @@ elif page == "Profile : WON vs. LOST":
     - **Business Type:** **Existing Business** also played a major role in LOST opportunities, making up 75.55% of LOST deals.
     - **Lead Source:** **Referrals**, **Sales Visits/Demos**, and **Field Service** were the most common sources of LOST deals.
     
-    **Considerations for Forecasts:**
-    If the scenario of 2025 remains similar of 2024, we:
-    - We hope close more from Segment 2 in 2025;
-    - ..
     """)
 
     
