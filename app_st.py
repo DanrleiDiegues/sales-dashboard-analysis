@@ -95,8 +95,8 @@ else:
 
 # --------- APP -----------
 
-st.sidebar.title("Navegação")
-page = st.sidebar.selectbox("Escolha uma página", 
+st.sidebar.title("Navigation")
+page = st.sidebar.selectbox("Choose a page", 
                             ["Home : Overview",
                              "Profile : WON vs. LOST",
                              "Average Ticket",
