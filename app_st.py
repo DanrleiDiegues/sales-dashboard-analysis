@@ -525,6 +525,9 @@ elif page == "Average Time to Close":
     st.subheader('Deep Dive in Type of Business')
 
     # Display the stats table in Streamlit
+    # Filtrar os dados para incluir apenas 'New Business' e 'Existing Business'
+    filtered_data = data[data['Type'].isin(['New Business', 'Existing Business'])]
+    
     stats_wl_avg_time_type_business = data.groupby(['Stage', "Type"])['Deal Opened (Days)'].describe()
     
     col1, col2 = st.columns(2)
