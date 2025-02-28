@@ -112,24 +112,6 @@ if page == "Home : Overview":
     st.title("Home")
     st.header('Overview data')
     
-    
-    col1, col2 = st.columns(2)
-    with col1:
-        st.plotly_chart(graphics["fig_dist_won_lost.pkl"], use_container_width=True)
-    with col2:
-        # Add notes:
-        st.write("\n\n\n")
-        st.markdown("""
-        **Notes:**
-        - The dataset appears to be well-balanced between Won and Lost Opportunities, providing a solid foundation for analysis:
-        - Percentages:
-        - Stage: Closed Won: 51.95%
-        - Stage: Closed Lost: 48.05%
-        - Opportunity Value (EUR): The mean value is €146.22.
-        - Deal Duration (Days): On average, deals have been open for ~54 days.
-        
-        """)
-    
     st.subheader("Dataset Details")
     
     st.dataframe(data)
@@ -154,7 +136,23 @@ elif page == "Profile : WON vs. LOST":
     
     # ======= Won vs. Lost Profile Analysis Charts ============
     
-    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.plotly_chart(graphics["fig_dist_won_lost.pkl"], use_container_width=True)
+    with col2:
+        # Add notes:
+        st.write("\n\n\n")
+        st.markdown("""
+        **Notes:**
+        - The dataset appears to be well-balanced between Won and Lost Opportunities, providing a solid foundation for analysis:
+        - Percentages:
+        - Stage: Closed Won: 51.95%
+        - Stage: Closed Lost: 48.05%
+        - Opportunity Value (EUR): The mean value is €146.22.
+        - Deal Duration (Days): On average, deals have been open for ~54 days.
+        
+        """)
+        
     ### -----------  Close Reasons --------------
     st.subheader('Close Reason Analysis')
     
