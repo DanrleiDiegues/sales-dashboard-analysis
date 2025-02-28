@@ -576,10 +576,10 @@ elif page == "Model : Prediction":
         # Display model performance
         st.markdown(f"""
             **Model's Performance | Scores:**
-            - **Accuracy:** {scores['accuracy']:.4f} %
-            - **Precision:** {scores['precision']:.4f} %
-            - **Recall:** {scores['recall']:.4f} %
-            - **F1-score:** {scores['f1_score']:.4f} %
+            - **Accuracy:** {scores['accuracy']:.2f} %
+            - **Precision:** {scores['precision']:.2f} %
+            - **Recall:** {scores['recall']:.2f} %
+            - **F1-score:** {scores['f1_score']:.2f} %
         """)
     with col2:
         # Display the impact of the chosen metric
