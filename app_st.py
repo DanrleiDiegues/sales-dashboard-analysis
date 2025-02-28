@@ -552,16 +552,16 @@ elif page == "Model : Prediction":
     # Dictionary with model performance scores
     model_scores = {
         "catboost_base_model.pkl": {
-            "accuracy": "68.66 %",
-            "precision": "72.51 %",
-            "recall": "65.58 %",
-            "f1_score": "68.87 %"
+            "accuracy": 68.66,
+            "precision": 72.51,
+            "recall": 65.58,
+            "f1_score": 68.87
         },
         "catboost_tuned_model.pkl": {
-            "accuracy": "68.51 %",
-            "precision": "71.84 %",
-            "recall": "66.49 %",
-            "f1_score": "69.06 %"
+            "accuracy": 68.51,
+            "precision": 71.84,
+            "recall": 66.49,
+            "f1_score": 69.06
         }
     }
     
@@ -576,10 +576,10 @@ elif page == "Model : Prediction":
         # Display model performance
         st.markdown(f"""
             **Model's Performance | Scores:**
-            - **Accuracy:** {scores['accuracy']:.4f}
-            - **Precision:** {scores['precision']:.4f}
-            - **Recall:** {scores['recall']:.4f}
-            - **F1-score:** {scores['f1_score']:.4f}
+            - **Accuracy:** {scores['accuracy']:.4f} %
+            - **Precision:** {scores['precision']:.4f} %
+            - **Recall:** {scores['recall']:.4f} %
+            - **F1-score:** {scores['f1_score']:.4f} %
         """)
     with col2:
         # Display the impact of the chosen metric
