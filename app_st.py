@@ -374,11 +374,10 @@ elif page == "Average Ticket":
         # Add notes:
         st.markdown("""         
         **Notes | General:**
-        In geraneral,
-        - The LOST Opportunities have a mean of 123.97 and the stand deviation of 161, lower than Wons
-        - The median of LOSTs is 61 EUR, lower than WONs (Median is better to analyse because is less sensitive to Outliers)
-        - The average value of WON ops are 166.29, bigger than Losts
-        - In general, the value of WON Opps are higher than LOST Opps
+        In general:
+        - The LOST opportunities have a mean of 123.97 and a standard deviation of 161, which is lower than that of WONs.
+        - The median of LOST opportunities is 61 EUR, which is lower than that of WONs. (The median is a better metric for analysis because it is less sensitive to outliers.)
+        - The average value of WON opportunities is 166.29, which is higher than that of LOST opportunities. In general, the value of WON opportunities is greater than that of LOST opportunities.
         """)
     
     ### -----------  DEEP DIVE BY ACCOUNT TYPE --------------
@@ -398,8 +397,9 @@ elif page == "Average Ticket":
         # Add notes:
         st.markdown("""
         **Notes | Account Type:**
-        - On LOST Opps, Small business have a higher mean Opp Value (EUR)
-        - On WON Opps, Top 2 business have a higher mean Opp Value (EUR) - Top 2 seems to bring more value for the company, in general
+        - For LOST opportunities, small businesses have a higher mean opportunity value (EUR).
+        - For WON opportunities, the top 2 businesses have a higher mean opportunity value (EUR)—suggesting that these top 2 businesses generally bring more value to the company.
+        - Observation: In LOST opportunities, we see that the highest average ticket (AT) is in small businesses. Aligning this with the previous chart, which we observed that we lose more small businesses compared to other business segments, one possible cause could be the higher average ticket in small businesses.
         """)
         
         
@@ -419,9 +419,10 @@ elif page == "Average Ticket":
         # Add notes:
         st.markdown("""
         **Notes | Country:**
-        - The Mean Mean of WON Opportunities Occour on Country 1 - Mean of 211 EUR. However, is the country that we Sell less.
-        - The Major Mean of LOST Opportunities Occour on Country 5 - Mean of 209 EUR; Despite this, Country 5 is where our results proportionally is better in WONs (83% are WONs)
-        """)
+        - The highest mean of WON opportunities occurs in Country 1, with a mean of 211 EUR. However, it is the country where we sell the least.
+        - The highest mean of LOST opportunities occurs in Country 5, with a mean of 209 EUR. Despite this, Country 5 has the highest proportion of WON opportunities, with 83% of deals being WON.
+        
+                """)
         
     ### -----------  DEEP DIVE BY SEGMENT --------------
     st.subheader('Deep Dive in Segment')
@@ -439,8 +440,8 @@ elif page == "Average Ticket":
         # Add notes:
         st.markdown("""
         **Notes | Country:**
-        - On WON opportunities, Segment 4 represents the highest mean, with 233.90 EUR, suggesting that this segment has higher-value deals when successfully closed. Segment 4 has the highest variability (std 270.07 EUR for Won), which suggests that deals in this segment might range from very small to extremely large values.
-        - Segment 1 has the highest mean among LOST opportunities (127.18 EUR), meaning that this segment represents the largest volume of lost deals in terms of value.
+        - For WON opportunities, Segment 4 has the highest mean value, at 233.90 EUR, suggesting that this segment tends to have higher-value deals when successfully closed. Additionally, Segment 4 exhibits the highest variability (standard deviation: 270.07 EUR), indicating that deals in this segment can range from very small to extremely large values.
+        - Segment 1 has the highest mean value among LOST opportunities (127.18 EUR), meaning that this segment represents the largest volume of lost deals in terms of value.
         """)
 
 
@@ -501,24 +502,22 @@ elif page == "Average Time to Close":
         # Add notes:
         st.markdown("""
         **Notes | Account Type:**
-        - WON Deals Close Faster Than LOST Deals
-            - The average number of days to close a WON deal is significantly lower across all account types compared to LOST deals.
-            - For example, Small Accounts take 34 days (WON) vs. 80 days (LOST) on average.
+        WON Deals Close Faster Than LOST Deals
+        - The average number of days to close a WON deal is significantly lower across all account types compared to LOST deals.
+        - For example, Small Accounts take 34 days (WON) vs. 80 days (LOST) on average.
 
-        -Top 2 Accounts Have the Fastest WON Deals
-            - Among WON deals, Top 2 Accounts close the fastest, with a mean of 31.06 days, followed by Top 3 (34 days) and Small Accounts (34 days).
-            - This suggests that Top 2 Accounts may have a more streamlined decision-making process or higher deal urgency.
+        Top 2 Accounts Have the Fastest WON Deals
+        - Among WON deals, Top 2 Accounts close the fastest, with a mean of 31.06 days, followed by Top 3 (34 days) and Small Accounts (34 days).
+        - This suggests that Top 2 Accounts may have a more streamlined decision-making process or higher deal urgency.
         
-        - Small LOST Accounts Take the Longest to Close:
-            - Small Accounts have the highest average duration for LOST deals (80 days). This could indicate higher indecision or more budget constraints.
+        Small LOST Accounts Take the Longest to Close:
+        - Small Accounts have the highest average duration for LOST deals (80 days). This could indicate higher indecision or more budget constraints.
         
-        - Higher Standard Deviation in LOST Deals Suggests Unpredictability, possibly due to prolonged negotiations or reconsiderations deals.
-            
         """)
         
         
     ### -----------  DEEP DIVE BY TYPE OF BUSINESS --------------
-    st.subheader('Deep Dive in Existing Business')
+    st.subheader('Deep Dive in Type of Business')
 
     # Display the stats table in Streamlit
     stats_wl_avg_time_type_business = data.groupby(['Stage', "Type"])['Deal Opened (Days)'].describe()
@@ -553,16 +552,16 @@ elif page == "Model : Prediction":
     # Dictionary with model performance scores
     model_scores = {
         "catboost_base_model.pkl": {
-            "accuracy": 0.6866,
-            "precision": 0.7251,
-            "recall": 0.6558,
-            "f1_score": 0.6887
+            "accuracy": "68.66 %",
+            "precision": "72.51 %",
+            "recall": "65.58 %",
+            "f1_score": "68.87 %"
         },
         "catboost_tuned_model.pkl": {
-            "accuracy": 0.6851,
-            "precision": 0.7184,
-            "recall": 0.6649,
-            "f1_score": 0.6906
+            "accuracy": "68.51 %",
+            "precision": "71.84 %",
+            "recall": "66.49 %",
+            "f1_score": "69.06 %"
         }
     }
     
@@ -625,7 +624,7 @@ elif page == "Model : Prediction":
         shap_values = explainer.shap_values(new_entry)
 
         # SHAP Force Plot
-        st.write("**SHAP Decision Visualization**")
+        st.write("**SHAP (SHapley Additive exPlanations) - Decision Visualization**")
         shap.initjs()
 
         # Gerar force_plot e salvar como HTML
