@@ -118,6 +118,7 @@ if page == "Home : Overview":
         st.plotly_chart(graphics["fig_dist_won_lost.pkl"], use_container_width=True)
     with col2:
         # Add notes:
+        st.write("\n\n\n")
         st.markdown("""
         **Notes:**
         - The dataset appears to be well-balanced between Won and Lost Opportunities, providing a solid foundation for analysis:
