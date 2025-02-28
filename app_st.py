@@ -120,7 +120,13 @@ if page == "Home : Overview":
         # Add notes:
         st.markdown("""
         **Notes:**
-        - As we can see, we have a balanced dataset between Won and Lost Opportunities to Analyse.
+        - The dataset appears to be well-balanced between Won and Lost Opportunities, providing a solid foundation for analysis:
+        - Percentages:
+        - Stage: Closed Won: 51.95%
+        - Stage: Closed Lost: 48.05%
+        - Opportunity Value (EUR): The mean value is €146.22.
+        - Deal Duration (Days): On average, deals have been open for ~54 days.
+        
         """)
     
     st.subheader("Dataset Details")
@@ -250,13 +256,11 @@ elif page == "Profile : WON vs. LOST":
     # Add notes:
     st.markdown("""
     Notes | Time Analysis:
-    - The month with more deals closed WON was March (4553 deals), representing 59.1% of the deals closed in the month. Followed by September (4166) (54.2%) and June (4091) (54.2%)
-    - In percentage february was the best, followed by March and April.
-
-    - In terms of Total Numer of deals, the best Quarter is the Q1, with 11.7K deals WONs. In percentage, Q2 is better, with 54.9% deals WON
-
-    - January was the month with most LOSTs (5728), representing (59.4% of the deals closed on the month)
-    - In terms of Total Number of Deals and Proportionaly, the Q4 is the worse quarter. With 10.893 deals Lost, representing 53.3% of the total in the quarter
+    - March had the highest number of deals closed as "WON" with 4,553 deals, accounting for 59.1% of the total deals closed that month. It was followed by September (4,166 deals, 54.2%) and June (4,091 deals, 54.2%).
+    - February had the highest percentage of deals closed as "WON," followed by March and April.
+    - In terms of Total Number of Deals, Q1 was the best quarter, with 11.7K deals closed as "WON." However, in terms of percentage, Q2 performed the best, with 54.9% of the deals closed as "WON."
+    - January had the highest number of deals marked as "LOST" (5,728 deals), representing 59.4% of the deals closed that month.
+    - In terms of both Total Number of Deals and Proportion, Q4 was the worst-performing quarter, with 10,893 deals lost, making up 53.3% of the total deals lost in that quarter.
     """)
     
     ### -----------  Time Analysis in EUR (€) --------------
@@ -599,7 +603,7 @@ elif page == "Model : Prediction":
     country = st.selectbox("Country", ['Country 1', 'Country 2', 'Country 5'])
     segment = st.selectbox("Segment", ['Segment 1', 'Segment 2', 'Segment 3', 'Segment 4'])
     deal_type = st.selectbox("Type", ['New Business', 'Existing Business'])
-    opp_value = st.number_input("Opportunity Value (EUR)", min_value=0, max_value=500, step=1) # Limiting entry to 500 (EUR)
+    opp_value = st.number_input("Opportunity Value (EUR)", min_value=0, max_value=500, step=1, value=100) # Limiting entry to 500 (EUR)
     
     # Create DataFrame with input data
     new_entry = pd.DataFrame({
